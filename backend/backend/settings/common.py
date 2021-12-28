@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     # My Apps
     "accounts.apps.AccountsConfig",
+    "posts.apps.PostsConfig",
 ]
 
 MIDDLEWARE = [

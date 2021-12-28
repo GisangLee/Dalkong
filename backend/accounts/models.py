@@ -14,6 +14,10 @@ class User(AbstractUser):
         (GENDER_FEMALE, "여자"),
     )
 
+    LOGIN_KAKAO = "카카오"
+    LOGIN_EMAIL = "이메일"
+    LOGIN_CHOICE = ((LOGIN_KAKAO, "카카오"), (LOGIN_EMAIL, "이메일"))
+
     follower_set = models.ManyToManyField("self", blank=True)
     following_set = models.ManyToManyField("self", blank=True)
     email = models.EmailField(max_length=200)
@@ -23,3 +27,6 @@ class User(AbstractUser):
     birthdate = models.DateField(blank=True, null=True)
     email_verified = models.BooleanField(default=False)
     email_secret = models.CharField(max_length=120, default="", blank=True)
+    login_method = models.CharField(
+        choices=LOGIN_CHOICE, max_length=3, default=LOGIN_EMAIL
+    )
