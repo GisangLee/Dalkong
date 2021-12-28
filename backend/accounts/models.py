@@ -14,6 +14,8 @@ class User(AbstractUser):
         (GENDER_FEMALE, "여자"),
     )
 
+    follower_set = models.ManyToManyField("self", blank=True)
+    following_set = models.ManyToManyField("self", blank=True)
     email = models.EmailField(max_length=200)
     bio = models.CharField(max_length=255, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=2, blank=True)
