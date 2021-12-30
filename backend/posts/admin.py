@@ -4,7 +4,7 @@ from . import models as post_models
 # Register your models here.
 
 
-class TagInlie(admin.TabularInline):
+class PhotoInline(admin.TabularInline):
     model = post_models.Photo
 
 
@@ -17,16 +17,14 @@ class PostAdmin(admin.ModelAdmin):
         "desc",
     )
 
-    list_filter = ("tags",)
-
-    inlines = (TagInlie,)
+    inlines = (PhotoInline,)
 
     fieldsets = (
         (
             "게시글 기본 정보",
             {
                 "fields": (
-                    "autor",
+                    "author",
                     "title",
                     "desc",
                 ),
