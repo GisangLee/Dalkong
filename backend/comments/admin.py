@@ -9,7 +9,7 @@ class CommentAdmin(admin.ModelAdmin):
 
     list_display = admin.ModelAdmin.list_display + (
         "user",
-        "room",
+        "post",
         "desc",
     )
 
@@ -17,7 +17,7 @@ class CommentAdmin(admin.ModelAdmin):
         (
             "댓글 정보",
             {
-                "fields": ("desc", "user", "room"),
+                "fields": ("desc", "user", "post"),
             },
         ),
     )
