@@ -37,6 +37,9 @@ class Post(TimeStampModel):
     tags = models.ManyToManyField(
         "Tag", related_name="posts", blank=True, verbose_name="태그"
     )
+    like_set = models.ManyToManyField(
+        user_models.User, blank=True, verbose_name="좋아요", related_name="likes"
+    )
 
     # 하나의 게시글은 여러 좋아요가 달린다.
 

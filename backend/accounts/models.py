@@ -26,7 +26,9 @@ class User(AbstractUser):
         choices=GENDER_CHOICES, max_length=2, blank=True, verbose_name="성별"
     )
     avatar = models.ImageField(
-        upload_to="user_profile/%Y/%m/%d", blank=True, verbose_name="프로필 사진"
+        upload_to="user_profile/%Y/%m/%d",
+        blank=True,
+        verbose_name="프로필 사진",
     )
     birthdate = models.DateField(blank=True, null=True, verbose_name="생일")
     email_verified = models.BooleanField(default=False, verbose_name="이메일 인증 여부")

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third Party Apps
+    "rest_framework",
     # My Apps
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
@@ -127,4 +128,13 @@ BATON = {
     "SITE_HEADER": "달콩 백오피스",
     "SITE_TITLE": "달콩 백오피스",
     "INDEX_TITLE": "달콩 관리자페이지",
+}
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ]
 }

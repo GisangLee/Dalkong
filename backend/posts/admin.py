@@ -39,9 +39,9 @@ class PostAdmin(admin.ModelAdmin):
         (
             "태그 정보",
             {
-                "fields": ("tags",),
+                "fields": ("tags", "like_set"),
             },
         ),
     )
 
-    filter_horizontal = ("tags",)
+    filter_horizontal = ("tags", "like_set")
