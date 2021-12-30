@@ -127,5 +127,4 @@ BATON = {
     "SITE_HEADER": "달콩 백오피스",
     "SITE_TITLE": "달콩 백오피스",
     "INDEX_TITLE": "달콩 관리자페이지",
-    "SUPPORT_HREF": "kisang6710@gmail.com",
 }

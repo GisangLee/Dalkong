@@ -18,6 +18,12 @@ class CustomUserAdmin(UserAdmin):
         "email_verified",
     )
 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = {
+            "title": "사용자 목록",
+        }
+        return super().changelist_view(request, extra_context)
+
     fieldsets = (
         (
             "유저 기본 정보",

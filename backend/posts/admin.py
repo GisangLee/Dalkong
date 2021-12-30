@@ -17,6 +17,12 @@ class PostAdmin(admin.ModelAdmin):
         "desc",
     )
 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = {
+            "title": "게시글 목록",
+        }
+        return super().changelist_view(request, extra_context)
+
     inlines = (PhotoInline,)
 
     fieldsets = (

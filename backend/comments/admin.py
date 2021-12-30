@@ -13,6 +13,12 @@ class CommentAdmin(admin.ModelAdmin):
         "desc",
     )
 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = {
+            "title": "댓글 목록",
+        }
+        return super().changelist_view(request, extra_context)
+
     fieldsets = (
         (
             "댓글 정보",
