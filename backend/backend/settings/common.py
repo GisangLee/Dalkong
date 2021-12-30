@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "baton",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -33,6 +34,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
     "comments.apps.CommentsConfig",
+    "baton.autodiscover",
 ]
 
 MIDDLEWARE = [
@@ -119,3 +121,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
+
+
+BATON = {
+    "SITE_HEADER": "달콩 백오피스",
+    "SITE_TITLE": "달콩 백오피스",
+    "INDEX_TITLE": "달콩 관리자페이지",
+    "SUPPORT_HREF": "kisang6710@gmail.com",
+}
