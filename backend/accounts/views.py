@@ -7,6 +7,17 @@ from rest_framework.response import Response
 from . import models as user_models
 
 
+class DeleteUserView(APIView):
+    def delete(self, request, **kwargs):
+        pk = kwargs.get("pk")
+        if pk is not None:
+            user = user_models.User.objects.get(pk=pk)
+            user.delete()
+            return Response("user deleted", status=status.HTTP_200_OK)
+        else:
+            return Response("user not deleted", status=status.HTTP_400_BAD_REQUEST)
+
+
 class UpdateProfileView(APIView):
     def error(self):
         return status.HTTP_400_BAD_REQUEST

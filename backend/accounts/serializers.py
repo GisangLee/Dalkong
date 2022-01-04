@@ -8,6 +8,12 @@ class UserSerializer:
         fields = "__all__"
 
 
+class DeleteUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = user_models.User
+        fields = ["pk", "email", "password"]
+
+
 class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = user_models.User
