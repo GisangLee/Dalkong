@@ -8,8 +8,10 @@ class UserSerializer:
         fields = "__all__"
 
 
-class JwtLoginSerializer:
-    pass
+class UpdateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = user_models.User
+        fields = ["pk", "bio", "avatar"]
 
 
 class SignupSerializer(serializers.ModelSerializer):
