@@ -12,6 +12,7 @@ class PhotoInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
 
     list_display = (
+        "pk",
         "author",
         "title",
         "desc",

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from accounts import models, serializers
 from rest_framework import status
 from rest_framework.views import APIView
@@ -11,7 +11,8 @@ class DeleteUserView(APIView):
     def delete(self, request, **kwargs):
         pk = kwargs.get("pk")
         if pk is not None:
-            user = user_models.User.objects.get(pk=pk)
+            user = get_object_or_404(user_models.User, pk=pk)
+            print(f"username : {user.username}")
             user.delete()
             return Response("user deleted", status=status.HTTP_200_OK)
         else:
@@ -25,7 +26,8 @@ class UpdateProfileView(APIView):
     def put(self, request, **kwargs):
         if kwargs.get("pk") is not None:
             pk = kwargs.get("pk")
-            user = user_models.User.objects.get(pk=pk)
+            user = get_object_or_404(user_models.User, pk=pk)
+            print(f" username: {user.username}")
             serializer = serializers.UpdateProfileSerializer(user, data=request.data)
             if serializer.is_valid():
                 serializer.save()
