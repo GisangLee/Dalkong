@@ -17,16 +17,20 @@ class UpdatePostView(APIView):
         pk = kwargs.get("pk")
         if pk is not None:
             post = get_object_or_404(post_models.Post, pk=pk)
-            print(f"post is {post}")
+            print(f"post is {post.author.pk}")
             print(f"user: {request.user}")
-            serializer = serializers.PostSerializer(post, data=request.data)
-            if serializer.is_valid():
-                serializer.save(author=request.user)
-                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            if post.author.pk == request.user.pk:
+                serializer = serializers.PostSerializer(post, data=request.data)
+                if serializer.is_valid():
+                    serializer.save(author=request.user)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    return Response("검증 오류", self.error())
             else:
-                return Response("invalid response123", self.error())
+                return Response("게시글 소유자가 아닙니다.", self.error())
         else:
-            return Response("invalid response", self.error())
+            return Response("존재하지 않는 게시글입니다.", self.error())
 
 
 class DeletePostView(APIView):
@@ -34,8 +38,11 @@ class DeletePostView(APIView):
         pk = kwargs.get("pk")
         if pk is not None:
             post = get_object_or_404(post_models.Post, pk=pk)
-            post.delete()
-            return Response("post is deleted", status=status.HTTP_200_OK)
+            if post.author.pk == request.user.pk:
+                post.delete()
+                return Response("post is deleted", status=status.HTTP_200_OK)
+            else:
+                return Response("게시글 소유자가 아닙니다.", status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response("post is not deleted", status=status.HTTP_400_BAD_REQUEST)
 
