@@ -44,9 +44,32 @@ class SignupView(APIView):
     ]
 
     def post(self, request, format=None):
-        model = user_models.User
         serializer = serializers.SignupSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+
+
+class UserFollow(APIView):
+    def post(self, request):
+        username = request.data["username"]
+        print(f"username : {username}")
+        follow_user = get_object_or_404(
+            user_models.User, username=username, is_active=True
+        )
+        request.user.following_set.add(follow_user)
+        follow_user.follower_set.add(request.user)
+        return Response(status.HTTP_204_NO_CONTENT)
+
+
+class UserUnfollow(APIView):
+    def post(self, request):
+        username = request.data["username"]
+        print(f"username : {username}")
+        follow_user = get_object_or_404(
+            user_models.User, username=username, is_active=True
+        )
+        request.user.following_set.remove(follow_user)
+        follow_user.follower_set.remove(request.user)
+        return Response(status.HTTP_204_NO_CONTENT)

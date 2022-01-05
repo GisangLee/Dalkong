@@ -37,4 +37,18 @@ class CustomUserAdmin(UserAdmin):
                 ),
             },
         ),
+        (
+            "팔로우 정보",
+            {
+                "fields": (
+                    "following_set",
+                    "follower_set",
+                ),
+            },
+        ),
     ) + UserAdmin.fieldsets
+
+    filter_horizontal = (
+        "following_set",
+        "follower_set",
+    )
