@@ -1,4 +1,3 @@
-from django.db.models import fields
 from rest_framework import serializers
 from . import models as post_models
 from accounts import models as user_models

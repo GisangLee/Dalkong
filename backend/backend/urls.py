@@ -14,6 +14,7 @@ urlpatterns = [
     path("baton/", include("baton.urls")),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("posts/", include("posts.urls", namespace="posts")),
+    path("comments/", include("comments.urls", namespace="comments")),
     path("api-auth/", include("rest_framework.urls")),
     path("token/auth/", obtain_jwt_token),
     path("token/refresh/", refresh_jwt_token),
