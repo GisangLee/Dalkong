@@ -10,6 +10,28 @@ from posts import models as post_models
 # Create your views here.
 
 
+class UpdateCommentView(APIView):
+    def put(self, request, **kwargs):
+        post_pk = kwargs.get("pk")
+        comment_pk = kwargs.get("comment_pk")
+
+        print(f"게시글 번호 : {post_pk}")
+        print(f"댓글 번호 : {comment_pk}")
+
+        post = post_models.Post.objects.get(pk=post_pk)
+        print(f"해당 게시글 : {post}")
+
+        if comment_pk is not None:
+            comment = comment_models.Comment.objects.get(pk=comment_pk)
+            print(f"수정하고자 하는 댓글: {comment}")
+            serializer = serializers.CommentSerializer(comment, data=request.data)
+            if serializer.is_valid():
+                serializer.save(user=request.user, post=post)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class CommentView(APIView):
     serializer_classes = [serializers.CommentSerializer]
 
@@ -37,6 +59,3 @@ class CommentView(APIView):
             serializer.save(user=request.user, post=post)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, **kwargs):
-        pk = kwargs.get("pk")

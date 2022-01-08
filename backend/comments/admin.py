@@ -8,6 +8,7 @@ from . import models as comment_models
 class CommentAdmin(admin.ModelAdmin):
 
     list_display = admin.ModelAdmin.list_display + (
+        "pk",
         "user",
         "post",
         "desc",

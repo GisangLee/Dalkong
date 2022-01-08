@@ -10,4 +10,9 @@ urlpatterns = [
     path("deletepost/<int:pk>/", views.DeletePostView.as_view(), name="delete-post"),
     path("updatepost/<int:pk>/", views.UpdatePostView.as_view(), name="update-post"),
     path("<int:pk>/comments/", comment_views.CommentView.as_view(), name="comment"),
+    path(
+        "<int:pk>/comments/<int:comment_pk>",
+        comment_views.UpdateCommentView.as_view(),
+        name="comment",
+    ),
 ]
