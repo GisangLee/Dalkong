@@ -31,6 +31,15 @@ class UpdateCommentView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, **kwargs):
+        comment_pk = kwargs.get("comment_pk")
+        if comment_pk is not None:
+            comment = comment_models.Comment.objects.get(pk=comment_pk)
+            comment.delete()
+            return Response("comment delete", status=status.HTTP_200_OK)
+
+        return Response("comment not deleted", status=status.HTTP_400_BAD_REQUEST)
+
 
 class CommentView(APIView):
     serializer_classes = [serializers.CommentSerializer]
