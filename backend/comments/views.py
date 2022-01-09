@@ -50,7 +50,7 @@ class CommentView(APIView):
         comments = post_models.Post.objects.get(pk=pk).comments.all()
 
         serializer = serializers.CommentSerializer(comments, many=True)
-        print(f"request : {request}")
+        print(f"current logged in user : {request.user}")
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, **kwargs):
@@ -61,10 +61,11 @@ class CommentView(APIView):
         print(f"댓글 POST : {request}")
         print(f"댓글 소유자 : {request.user}")
         print("댓글 게시글", {post})
-        print(f"request Data : {request.data}")
+        print(f"요청받은 데이터 : {request.data}")
 
         serializer = serializers.CommentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user, post=post)
+            print("댓글 저장 완료")
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
