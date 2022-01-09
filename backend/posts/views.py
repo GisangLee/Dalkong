@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models as post_models
 from . import serializers
+from accounts import models as user_models
 
 # Create your views here.
 
@@ -62,6 +63,9 @@ class PostListView(APIView):
             .select_related("author")
             .prefetch_related("tags", "like_set")
         )
+        photos = post_models.Post.objects.get(pk=5).photos.all()
+        print(photos[0].file.url)
+
         serializer = serializers.PostSerializer(posts, many=True)
         return Response(serializer.data)
 

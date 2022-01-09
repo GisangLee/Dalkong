@@ -40,7 +40,6 @@ class Post(TimeStampModel):
     like_set = models.ManyToManyField(
         user_models.User, blank=True, verbose_name="좋아요", related_name="likes"
     )
-
     # 하나의 게시글은 여러 좋아요가 달린다.
 
     def __str__(self):
@@ -55,7 +54,7 @@ class Photo(TimeStampModel):
     file = models.ImageField(upload_to="posts/%Y/%m/%d", verbose_name="파일")
     caption = models.TextField(verbose_name="설명", blank=True)
     post = models.ForeignKey(
-        "Post", on_delete=models.CASCADE, verbose_name="해당 게시글", related_name="photos"
+        Post, on_delete=models.CASCADE, related_name="photos", verbose_name="게시글"
     )
 
     def __str__(self):

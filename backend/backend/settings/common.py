@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third Party Apps
     "rest_framework",
+    "corsheaders",
     # My Apps
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -148,3 +150,9 @@ JWT_AUTH = {
     "JWT_EXPIRATION_DELTA": timedelta(days=7),
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=28),
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
