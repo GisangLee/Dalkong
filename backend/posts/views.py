@@ -63,8 +63,6 @@ class PostListView(APIView):
             .select_related("author")
             .prefetch_related("tags", "like_set")
         )
-        photos = post_models.Post.objects.get(pk=5).photos.all()
-        print(photos[0].file.url)
 
         serializer = serializers.PostSerializer(posts, many=True)
         return Response(serializer.data)
